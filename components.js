@@ -72,40 +72,41 @@ export function App() {
 
     // Process
     e(Section, null,
+    
       e("h2", {
         className: "text-2xl font-semibold mb-6 glow-text text-center"
       }, "Our Process"),
     
       e("div", {
-        className: "flex flex-wrap justify-center items-center gap-4"
+        className: "flex flex-wrap justify-center items-center gap-10"
       },
     
         ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
         .map((step,i)=>(
           e("div", {
             key: i,
-            className: "process-pill"
-          }, step)
+            className: "process-orbit"
+          },
+            e("div", { className: "process-base" }),
+            e("div", { className: "process-pill-float" }, step)
+          )
         ))
       )
     ),
 
     // Projects
-    e("div", {
-      className: "flex flex-wrap justify-center items-center gap-10"
-    },
-    
-      ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
-      .map((step,i)=>(
-        e("div", {
-          key: i,
-          className: "process-orbit"
-        },
-          e("div", { className: "process-base" }),
-          e("div", { className: "process-pill-float" }, step)
-        )
-      ))
-    )
+    e(Section, null,
+      e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Featured Projects"),
+      e("div", { className: "grid md:grid-cols-2 gap-6" },
+        ["AI SaaS Platform","Automation System"].map((proj,i)=>(
+          e("div", { key:i, className: "project-card h-48" },
+            e("div", { className: "project-overlay" },
+              e("span", null, proj)
+            )
+          )
+        ))
+      )
+    ),
 
     // Tech Stack
     e(Section, null,
