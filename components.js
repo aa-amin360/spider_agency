@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "https://esm.sh/react@18";
+import React, { useEffect } from "https://esm.sh/react@18";
 
 const e = React.createElement;
-
-/* =========================
-   REUSABLE COMPONENTS
-========================= */
 
 export const Section = (props) =>
   e("section", { className: "max-w-6xl mx-auto px-6 py-12 reveal" }, props.children);
@@ -14,66 +10,8 @@ export const Card = ({ title }) =>
     e("div", { className: "inner-card" }, title)
   );
 
-/* =========================
-   LOOP TRACK SYSTEM 🔁
-========================= */
-
-function getLoopPosition(index, offset) {
-  const total = 7;
-  const angle = ((index + offset) / total) * Math.PI * 2;
-
-  const radiusX = 140;
-  const radiusY = 40;
-
-  const x = Math.cos(angle) * radiusX;
-  const y = Math.sin(angle) * radiusY;
-
-  const scale = 0.6 + (Math.cos(angle) + 1) * 0.2;
-
-  return {
-    transform: `translate(${x}px, ${y}px) scale(${scale})`,
-    opacity: scale > 0.85 ? 1 : 0,
-    zIndex: Math.floor(scale * 100)
-  };
-}
-
-export function ProcessLoop() {
-  const steps = ["Discover","Plan","Design","Develop","Deploy","Scale","Market"];
-   const [offset, setOffset] = useState(0);
-   
-   useEffect(() => {
-     let start = Date.now();
-   
-     const loop = () => {
-       const elapsed = (Date.now() - start) / 1000;
-       setOffset(elapsed * 0.5); // speed control
-       requestAnimationFrame(loop);
-     };
-   
-     loop();
-   }, []);
-
-  return e("div", { className: "loop-system" },
-
-    e("div", { className: "loop-base" }),
-
-      steps.map((step, i) =>
-        e("div", {
-          key: i,
-          className: "loop-item",
-          style: getLoopPosition(i, offset)
-        }, step)
-      )
-  );
-}
-
-/* =========================
-   MAIN APP
-========================= */
-
 export function App() {
 
-  /* Apple-style reveal */
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal");
 
@@ -83,14 +21,16 @@ export function App() {
           entry.target.classList.add("active");
         }
       });
-    }, { threshold: 0.15 });
+    }, {
+      threshold: 0.15
+    });
 
     elements.forEach(el => observer.observe(el));
   }, []);
 
   return e("div", null,
 
-    /* NAVBAR */
+    // Navbar
     e("nav", { className: "flex justify-between items-center px-6 py-4 max-w-6xl mx-auto" },
       e("h1", { className: "font-bold text-lg glow-text" }, "LOGO"),
       e("div", { className: "space-x-6 hidden md:flex" },
@@ -102,7 +42,7 @@ export function App() {
       e("button", { className: "btn-primary" }, "Start a Project")
     ),
 
-    /* HERO */
+    // Hero
     e(Section, null,
       e("div", { className: "grid md:grid-cols-2 gap-10 items-center" },
         e("div", null,
@@ -121,7 +61,7 @@ export function App() {
       )
     ),
 
-    /* SERVICES */
+    // Services
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Our Services"),
       e("div", { className: "grid md:grid-cols-3 gap-4" },
@@ -130,16 +70,21 @@ export function App() {
       )
     ),
 
-    /* PROCESS (YOUR LOOP SYSTEM 🔁) */
+    // Process
     e(Section, null,
-      e("h2", {
-        className: "text-2xl font-semibold mb-10 glow-text text-center"
-      }, "Our Process"),
-
-      e(ProcessLoop)
+      e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Our Process"),
+      e("div", { className: "flex flex-wrap gap-3" },
+        ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
+        .map((step,i)=>(
+          e("div", {
+            key: i,
+            className: "px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-sm"
+          }, step)
+        ))
+      )
     ),
 
-    /* PROJECTS */
+    // Projects
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Featured Projects"),
       e("div", { className: "grid md:grid-cols-2 gap-6" },
@@ -153,7 +98,7 @@ export function App() {
       )
     ),
 
-    /* TECH STACK */
+    // Tech Stack
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Tech Stack"),
       e("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-4" },
@@ -164,7 +109,7 @@ export function App() {
       )
     ),
 
-    /* TESTIMONIALS */
+    // Testimonials
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Testimonials"),
       e("div", { className: "grid md:grid-cols-3 gap-4" },
@@ -176,7 +121,7 @@ export function App() {
       )
     ),
 
-    /* CTA */
+    // CTA
     e(Section, null,
       e("div", { className: "cta-box" },
         e("h2", { className: "text-2xl font-bold mb-4" },
@@ -186,7 +131,7 @@ export function App() {
       )
     ),
 
-    /* FOOTER */
+    // Footer
     e("footer", { className: "border-t border-gray-700 mt-10 py-6 text-center reveal" },
       e("p", null, "© 2026 AI Agency")
     )
