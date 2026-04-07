@@ -13,7 +13,7 @@
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
   <!-- Babel (to use JSX directly) -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!--<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>-->
 
 </head>
 
@@ -21,161 +21,64 @@
 
 <div id="root"></div>
 
-<script type="text/babel">
+<script>
+const e = React.createElement;
 
-const Section = ({ children }) => (
-  <section className="max-w-6xl mx-auto px-6 py-12">
-    {children}
-  </section>
-);
+const Section = (props) =>
+  e("section", { className: "max-w-6xl mx-auto px-6 py-12" }, props.children);
 
-const Card = ({ title }) => (
-  <div className="bg-gradient-to-r from-purple-600 to-blue-500 p-[1px] rounded-xl">
-    <div className="bg-[#0b0f2a] p-6 rounded-xl text-center">
-      {title}
-    </div>
-  </div>
-);
+const Card = ({ title }) =>
+  e("div", { className: "bg-gradient-to-r from-purple-600 to-blue-500 p-[1px] rounded-xl" },
+    e("div", { className: "bg-[#0b0f2a] p-6 rounded-xl text-center" }, title)
+  );
 
 function App() {
-  return (
-    <div>
+  return e("div", null,
 
-      {/* Navbar */}
-      <nav className="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto">
-        <h1 className="font-bold text-lg">LOGO</h1>
-        <div className="space-x-6 hidden md:flex">
-          <a href="#">Services</a>
-          <a href="#">Work</a>
-          <a href="#">Process</a>
-          <a href="#">Contact</a>
-        </div>
-        <button className="bg-purple-600 px-4 py-2 rounded-lg">
-          Start a Project
-        </button>
-      </nav>
+    // Navbar
+    e("nav", { className: "flex justify-between items-center px-6 py-4 max-w-6xl mx-auto" },
+      e("h1", { className: "font-bold text-lg" }, "LOGO"),
+      e("div", { className: "space-x-6 hidden md:flex" },
+        e("a", null, "Services"),
+        e("a", null, "Work"),
+        e("a", null, "Process"),
+        e("a", null, "Contact")
+      ),
+      e("button", { className: "bg-purple-600 px-4 py-2 rounded-lg" }, "Start a Project")
+    ),
 
-      {/* Hero */}
-      <Section>
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <h1 className="text-4xl font-bold mb-4">
-              We Build, Scale, and Automate the Future
-            </h1>
-            <p className="mb-6 text-gray-300">
-              Full-Stack AI Solutions: Develop • Deploy • Scale • Secure • Market
-            </p>
-            <div className="space-x-4">
-              <button className="bg-purple-600 px-5 py-2 rounded-lg">
-                Start a Project
-              </button>
-              <button className="border px-5 py-2 rounded-lg">
-                Book a Call
-              </button>
-            </div>
-          </div>
-          <div className="h-64 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500"></div>
-        </div>
-      </Section>
+    // Hero
+    e(Section, null,
+      e("div", { className: "grid md:grid-cols-2 gap-10 items-center" },
+        e("div", null,
+          e("h1", { className: "text-4xl font-bold mb-4" }, "We Build, Scale, and Automate the Future"),
+          e("p", { className: "mb-6 text-gray-300" }, "Full-Stack AI Solutions: Develop • Deploy • Scale • Secure • Market"),
+          e("div", { className: "space-x-4" },
+            e("button", { className: "bg-purple-600 px-5 py-2 rounded-lg" }, "Start a Project"),
+            e("button", { className: "border px-5 py-2 rounded-lg" }, "Book a Call")
+          )
+        ),
+        e("div", { className: "h-64 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500" })
+      )
+    ),
 
-      {/* Services */}
-      <Section>
-        <h2 className="text-2xl font-semibold mb-6">Our Services</h2>
-        <div className="grid md:grid-cols-3 gap-4">
-          {[
-            "AI & Automation",
-            "Full Stack Development",
-            "Cloud & DevOps",
-            "Cybersecurity",
-            "Digital Marketing",
-            "SaaS Solutions"
-          ].map((item, i) => <Card key={i} title={item} />)}
-        </div>
-      </Section>
+    // Services
+    e(Section, null,
+      e("h2", { className: "text-2xl font-semibold mb-6" }, "Our Services"),
+      e("div", { className: "grid md:grid-cols-3 gap-4" },
+        ["AI & Automation","Full Stack Development","Cloud & DevOps","Cybersecurity","Digital Marketing","SaaS Solutions"]
+        .map((item, i) => e(Card, { key: i, title: item }))
+      )
+    ),
 
-      {/* Process */}
-      <Section>
-        <h2 className="text-2xl font-semibold mb-6">Our Process</h2>
-        <div className="flex flex-wrap gap-3">
-          {["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
-          .map((step,i)=>(
-            <div key={i} className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-sm">
-              {step}
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Projects */}
-      <Section>
-        <h2 className="text-2xl font-semibold mb-6">Featured Projects</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="p-6 bg-gradient-to-r from-purple-600 to-blue-500 rounded-xl">
-            Project One
-          </div>
-          <div className="p-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl">
-            Project Two
-          </div>
-        </div>
-      </Section>
-
-      {/* Tech Stack */}
-      <Section>
-        <h2 className="text-2xl font-semibold mb-6">Technology Stack</h2>
-        <div className="flex gap-6 text-lg">
-          <span>AI</span>
-          <span>React</span>
-          <span>AWS</span>
-          <span>Node</span>
-        </div>
-      </Section>
-
-      {/* Why Choose Us */}
-      <Section>
-        <h2 className="text-2xl font-semibold mb-6">Why Choose Us</h2>
-        <div className="grid md:grid-cols-4 gap-4">
-          {["End-to-End","AI Driven","Fast Deployment","Secure"]
-          .map((item,i)=>(
-            <Card key={i} title={item} />
-          ))}
-        </div>
-      </Section>
-
-      {/* Testimonials */}
-      <Section>
-        <h2 className="text-2xl font-semibold mb-6">Testimonials</h2>
-        <div className="grid md:grid-cols-3 gap-4">
-          {[1,2,3].map(i=>(
-            <div key={i} className="p-4 bg-[#111633] rounded-xl">
-              Client Feedback
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* CTA */}
-      <Section>
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold mb-4">
-            Ready to Transform Your Business?
-          </h2>
-          <button className="bg-purple-600 px-6 py-3 rounded-lg">
-            Get Started
-          </button>
-        </div>
-      </Section>
-
-      {/* Footer */}
-      <footer className="border-t border-gray-700 mt-10 py-6 text-center">
-        <p>© 2026 AI Agency</p>
-      </footer>
-
-    </div>
+    // Footer
+    e("footer", { className: "border-t border-gray-700 mt-10 py-6 text-center" },
+      e("p", null, "© 2026 AI Agency")
+    )
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-
+ReactDOM.createRoot(document.getElementById("root")).render(e(App));
 </script>
 
 </body>
