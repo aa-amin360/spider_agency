@@ -91,18 +91,21 @@ export function App() {
     ),
 
     // Projects
-    e(Section, null,
-      e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Featured Projects"),
-      e("div", { className: "grid md:grid-cols-2 gap-6" },
-        ["AI SaaS Platform","Automation System"].map((proj,i)=>(
-          e("div", { key:i, className: "project-card h-48" },
-            e("div", { className: "project-overlay" },
-              e("span", null, proj)
-            )
-          )
-        ))
-      )
-    ),
+    e("div", {
+      className: "flex flex-wrap justify-center items-center gap-10"
+    },
+    
+      ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
+      .map((step,i)=>(
+        e("div", {
+          key: i,
+          className: "process-orbit"
+        },
+          e("div", { className: "process-base" }),
+          e("div", { className: "process-pill-float" }, step)
+        )
+      ))
+    )
 
     // Tech Stack
     e(Section, null,
