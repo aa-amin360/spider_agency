@@ -74,23 +74,28 @@ export function App() {
     e(Section, null,
     
       e("h2", {
-        className: "text-2xl font-semibold mb-6 glow-text text-center"
+        className: "text-2xl font-semibold mb-10 text-center"
       }, "Our Process"),
     
-      e("div", {
-        className: "flex flex-wrap justify-center items-center gap-10"
-      },
+      e("div", { className: "magnetic-system" },
     
-        ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
-        .map((step,i)=>(
-          e("div", {
-            key: i,
-            className: "process-orbit"
-          },
-            e("div", { className: "process-base" }),
-            e("div", { className: "process-pill-float" }, step)
-          )
-        ))
+        // solid base
+        e("div", { className: "magnetic-base" }),
+    
+        // floating rotating ring
+        e("div", { className: "magnetic-ring" },
+    
+          ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
+          .map((step,i)=>(
+            e("div", {
+              key: i,
+              className: "magnetic-item",
+              style: { "--i": i }
+            }, step)
+          ))
+    
+        )
+    
       )
     ),
 
