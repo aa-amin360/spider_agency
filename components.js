@@ -73,18 +73,17 @@ export function App() {
     // Process
     e(Section, null,
       e("h2", {
-        className: "text-2xl font-semibold mb-10 glow-text text-center"
+        className: "text-2xl font-semibold mb-8 glow-text text-center"
       }, "Our Process"),
     
-      e("div", { className: "infinity-system" },
+      e("div", { className: "train-wrapper" },
     
-        ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
-        .map((step, i) =>
-          e("div", {
-            key: i,
-            className: "infinity-item",
-            style: { "--i": i }
-          }, step)
+        e("div", { className: "train-track" },
+          ["Discover","Plan","Design","Develop","Deploy","Scale","Market",
+           "Discover","Plan","Design"] // duplicate for seamless loop
+          .map((step, i) =>
+            e("div", { key: i, className: "train-item" }, step)
+          )
         )
     
       )
