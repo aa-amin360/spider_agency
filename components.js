@@ -68,6 +68,68 @@ export function App() {
       )
     ),
 
+    // Process
+    e(Section, null,
+      e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Our Process"),
+      e("div", { className: "flex flex-wrap gap-3" },
+        ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
+        .map((step,i)=>(
+          e("div", {
+            key: i,
+            className: "px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-sm"
+          }, step)
+        ))
+      )
+    ),
+    
+    // Projects
+    e(Section, null,
+      e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Featured Projects"),
+      e("div", { className: "grid md:grid-cols-2 gap-6" },
+    
+        ["AI SaaS Platform","Automation System"].map((proj,i)=>(
+          e("div", { key:i, className: "project-card h-48" },
+            e("div", { className: "project-overlay" },
+              e("span", null, proj)
+            )
+          )
+        ))
+      )
+    ),
+    
+    // Tech Stack
+    e(Section, null,
+      e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Tech Stack"),
+      e("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-4" },
+        ["React","Node","AI","AWS","Docker","Firebase","Stripe","Next.js"]
+        .map((tech,i)=>(
+          e("div", { key:i, className: "tech-item" }, tech)
+        ))
+      )
+    ),
+    
+    // Testimonials
+    e(Section, null,
+      e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Testimonials"),
+      e("div", { className: "grid md:grid-cols-3 gap-4" },
+        [1,2,3].map(i=>(
+          e("div", { key:i, className: "testimonial" },
+            "Amazing service. Helped scale our business 🚀"
+          )
+        ))
+      )
+    ),
+    
+    // CTA
+    e(Section, null,
+      e("div", { className: "cta-box" },
+        e("h2", { className: "text-2xl font-bold mb-4" },
+          "Ready to Build Your AI Future?"
+        ),
+        e("button", { className: "btn-primary" }, "Get Started")
+      )
+    ),
+
     // Footer
     e("footer", { className: "border-t border-gray-700 mt-10 py-6 text-center reveal" },
       e("p", null, "© 2026 AI Agency")
