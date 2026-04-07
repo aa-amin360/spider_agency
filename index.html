@@ -5,84 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Agency</title>
 
-  <!-- Tailwind CDN -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- React CDN -->
-  <!-- <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-  //Babel (to use JSX directly)
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>-->
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./styles.css">
 
 </head>
 
 <body class="bg-[#0b0f2a] text-white">
+  <div id="root"></div>
 
-<div id="root"></div>
-
-<script type="module">
-import React from "https://esm.sh/react@18";
-import { createRoot } from "https://esm.sh/react-dom@18/client";
-
-const e = React.createElement;
-
-const Section = (props) =>
-  e("section", { className: "max-w-6xl mx-auto px-6 py-12" }, props.children);
-
-const Card = ({ title }) =>
-  e("div", { className: "bg-gradient-to-r from-purple-600 to-blue-500 p-[1px] rounded-xl" },
-    e("div", { className: "bg-[#0b0f2a] p-6 rounded-xl text-center" }, title)
-  );
-
-function App() {
-  return e("div", null,
-
-    // Navbar
-    e("nav", { className: "flex justify-between items-center px-6 py-4 max-w-6xl mx-auto" },
-      e("h1", { className: "font-bold text-lg" }, "LOGO"),
-      e("div", { className: "space-x-6 hidden md:flex" },
-        e("a", null, "Services"),
-        e("a", null, "Work"),
-        e("a", null, "Process"),
-        e("a", null, "Contact")
-      ),
-      e("button", { className: "bg-purple-600 px-4 py-2 rounded-lg" }, "Start a Project")
-    ),
-
-    // Hero
-    e(Section, null,
-      e("div", { className: "grid md:grid-cols-2 gap-10 items-center" },
-        e("div", null,
-          e("h1", { className: "text-4xl font-bold mb-4" }, "We Build, Scale, and Automate the Future"),
-          e("p", { className: "mb-6 text-gray-300" }, "Full-Stack AI Solutions: Develop • Deploy • Scale • Secure • Market"),
-          e("div", { className: "space-x-4" },
-            e("button", { className: "bg-purple-600 px-5 py-2 rounded-lg" }, "Start a Project"),
-            e("button", { className: "border px-5 py-2 rounded-lg" }, "Book a Call")
-          )
-        ),
-        e("div", { className: "h-64 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500" })
-      )
-    ),
-
-    // Services
-    e(Section, null,
-      e("h2", { className: "text-2xl font-semibold mb-6" }, "Our Services"),
-      e("div", { className: "grid md:grid-cols-3 gap-4" },
-        ["AI & Automation","Full Stack Development","Cloud & DevOps","Cybersecurity","Digital Marketing","SaaS Solutions"]
-        .map((item, i) => e(Card, { key: i, title: item }))
-      )
-    ),
-
-    // Footer
-    e("footer", { className: "border-t border-gray-700 mt-10 py-6 text-center" },
-      e("p", null, "© 2026 AI Agency")
-    )
-  );
-}
-
-createRoot(document.getElementById("root")).render(e(App));
-</script>
-  
+  <script type="module" src="./main.js"></script>
 </body>
 </html>
