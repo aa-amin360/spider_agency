@@ -245,10 +245,6 @@ body {
   background: linear-gradient(to left, #0b0f2a, transparent);
 }
 
-.train-wrapper:hover .train-track {
-  animation-play-state: paused;
-}
-
 /* moving track */
 .train-track {
   display: flex;
@@ -256,6 +252,10 @@ body {
   width: max-content;
 
   animation: trainMove 12s linear infinite;
+}
+
+.train-wrapper:hover .train-track {
+  animation-play-state: paused;
 }
 
 /* items */
