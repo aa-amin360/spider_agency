@@ -2,7 +2,6 @@
    BASE + BACKGROUND
 ========================= */
 
-/* Animated background */
 body {
   margin: 0;
   font-family: sans-serif;
@@ -33,7 +32,6 @@ body {
   filter: blur(20px) contrast(120%);
 }
 
-/* Keep content above canvas */
 #root {
   position: relative;
   z-index: 1;
@@ -58,25 +56,6 @@ body {
   transform: translateY(0) scale(1);
   filter: blur(0);
 }
-
-/* Stagger children */
-.reveal > * {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease;
-}
-
-.reveal.active > * {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Delay chain */
-.reveal.active > *:nth-child(1) { transition-delay: 0.1s; }
-.reveal.active > *:nth-child(2) { transition-delay: 0.2s; }
-.reveal.active > *:nth-child(3) { transition-delay: 0.3s; }
-.reveal.active > *:nth-child(4) { transition-delay: 0.4s; }
-.reveal.active > *:nth-child(5) { transition-delay: 0.5s; }
 
 /* =========================
    BUTTONS
@@ -112,12 +91,11 @@ body {
   background: linear-gradient(90deg, #7c3aed, #3b82f6);
   padding: 1px;
   border-radius: 12px;
-  transition: all 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .glow-card:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 10px 40px rgba(124, 58, 237, 0.5);
 }
 
 .inner-card {
@@ -135,7 +113,6 @@ body {
   height: 250px;
   border-radius: 16px;
   background: radial-gradient(circle, #3b82f6, #7c3aed);
-  box-shadow: 0 0 60px rgba(124, 58, 237, 0.6);
 }
 
 /* =========================
@@ -200,55 +177,67 @@ body {
   padding: 40px;
   border-radius: 20px;
   text-align: center;
-  box-shadow: 0 0 60px rgba(124, 58, 237, 0.6);
 }
 
 /* =========================
-   TEXT EFFECTS
+   TEXT
 ========================= */
 
 .glow-text {
-  text-shadow: 0 0 15px rgba(124, 58, 237, 0.7);
+  text-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
 }
 
 /* =========================
-   2D CIRCULAR FLOW SYSTEM
+   LOOP TRACK SYSTEM (FINAL)
 ========================= */
 
-.circle-system {
+.loop-system {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 260px;
   margin: 0 auto;
 }
 
-.circle-base {
+/* BASE (your rectangle) */
+.loop-base {
   position: absolute;
-  bottom: 30px;
+  bottom: 10px;
   left: 50%;
-  width: 120px;
+  width: 260px;
   height: 40px;
   transform: translateX(-50%);
-  border-radius: 50%;
+  border-radius: 8px;
+
   background: #111;
 }
 
-/* FIXED center reference */
-.circle-item {
+/* ITEMS */
+.loop-item {
   position: absolute;
   top: 50%;
   left: 50%;
 
-  transform: translate(0, 0);
-
-  padding: 10px 18px;
+  padding: 8px 16px;
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 13px;
 
   background: #1f2937;
   color: white;
 
   border: 1px solid rgba(255,255,255,0.08);
 
-  transition: transform 0.6s ease;
+  transition:
+    transform 0.6s ease,
+    opacity 0.6s ease;
+}
+
+/* FRONT = CLEAR */
+.loop-item[style*="scale(1)"] {
+  opacity: 1;
+}
+
+/* BACK = DIM */
+.loop-item[style*="scale(0.6)"],
+.loop-item[style*="scale(0.7)"] {
+  opacity: 0.5;
 }
