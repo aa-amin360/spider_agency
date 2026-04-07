@@ -212,20 +212,20 @@ body {
 }
 
 /* =========================
-   TRAIN FLOW SYSTEM 🚂
+   INFINITY LOOP ♾️
 ========================= */
 
-.train-wrapper {
+.infinity-system {
   position: relative;
-  width: 100%;
-  max-width: 700px;
+  width: 500px;
+  height: 250px;
   margin: 0 auto;
   overflow: hidden;
 }
 
-/* fade edges = cave illusion */
-.train-wrapper::before,
-.train-wrapper::after {
+/* fade edges (cave effect) */
+.infinity-system::before,
+.infinity-system::after {
   content: "";
   position: absolute;
   top: 0;
@@ -235,32 +235,23 @@ body {
   pointer-events: none;
 }
 
-.train-wrapper::before {
+.infinity-system::before {
   left: 0;
   background: linear-gradient(to right, #0b0f2a, transparent);
 }
 
-.train-wrapper::after {
+.infinity-system::after {
   right: 0;
   background: linear-gradient(to left, #0b0f2a, transparent);
 }
 
-.train-wrapper:hover .train-track {
-  animation-play-state: paused;
-}
+/* ITEMS */
+.infinity-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 
-/* moving track */
-.train-track {
-  display: flex;
-  gap: 12px;
-  width: max-content;
-
-  animation: trainMove 12s linear infinite;
-}
-
-/* items */
-.train-item {
-  padding: 10px 20px;
+  padding: 10px 18px;
   border-radius: 999px;
   font-size: 14px;
 
@@ -269,15 +260,25 @@ body {
 
   white-space: nowrap;
 
-  transition: transform 0.3s ease;
+  animation: infinityMove 10s linear infinite;
+  animation-delay: calc(var(--i) * -1.4s);
 }
 
-/* movement */
-@keyframes trainMove {
-  from {
-    transform: translateX(-50%);
+/* ♾️ PATH */
+@keyframes infinityMove {
+  0% {
+    transform: translate(-50%, -50%) translateX(-150px) translateY(0);
   }
-  to {
-    transform: translateX(0);
+  25% {
+    transform: translate(-50%, -50%) translateX(0px) translateY(-40px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateX(150px) translateY(0);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateX(0px) translateY(40px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateX(-150px) translateY(0);
   }
 }
