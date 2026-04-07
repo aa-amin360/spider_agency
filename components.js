@@ -71,13 +71,13 @@ export function App() {
     ),
 
     // Process
-   e(Section, null,
+    e(Section, null,
      e("h2", {
        className: "text-2xl font-semibold mb-8 glow-text text-center"
      }, "Our Process"),
-   
+    
      e("div", { className: "train-wrapper" },
-   
+    
        e("div", { className: "train-track" },
          ["Discover","Plan","Design","Develop","Deploy","Scale","Market",
           "Discover","Plan","Design"] // duplicate for seamless loop
@@ -85,9 +85,9 @@ export function App() {
            e("div", { key: i, className: "train-item" }, step)
          )
        )
-   
+    
      )
-   ),
+    ),
 
     // Projects
     e(Section, null,
