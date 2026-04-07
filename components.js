@@ -77,22 +77,18 @@ export function App() {
         className: "text-2xl font-semibold mb-10 text-center"
       }, "Our Process"),
     
-      e("div", { className: "ufo-system" },
+      e("div", { className: "circle-system" },
     
-        e("div", { className: "ufo-base" }),
+        e("div", { className: "circle-base" }),
     
-        e("div", { className: "ufo-ring" },
-    
-          ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
-          .map((step,i)=>(
-            e("div", {
-              key: i,
-              className: "ufo-item",
-              style: { "--i": i }
-            }, step)
-          ))
-    
-        )
+        ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
+        .map((step,i)=>(
+          e("div", {
+            key: i,
+            className: "circle-item",
+            style: { "--i": i }
+          }, step)
+        ))
     
       )
     ),
