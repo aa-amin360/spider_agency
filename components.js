@@ -72,13 +72,19 @@ export function App() {
 
     // Process
     e(Section, null,
-      e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Our Process"),
-      e("div", { className: "flex flex-wrap gap-3" },
+      e("h2", {
+        className: "text-2xl font-semibold mb-6 glow-text text-center"
+      }, "Our Process"),
+    
+      e("div", {
+        className: "flex flex-wrap justify-center items-center gap-4"
+      },
+    
         ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
         .map((step,i)=>(
           e("div", {
             key: i,
-            className: "px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-sm"
+            className: "process-pill"
           }, step)
         ))
       )
