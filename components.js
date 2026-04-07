@@ -15,44 +15,53 @@ export const Card = ({ title }) =>
   );
 
 /* =========================
-   PROCESS CIRCLE SYSTEM 🔄
+   LOOP TRACK SYSTEM 🔁
 ========================= */
 
-function getCirclePosition(index, total = 7) {
-  const radius = 120;
-  const angle = (index / total) * (2 * Math.PI);
+function getLoopPosition(index) {
+  const positions = [
+    { x: -140, y: 0, scale: 1 },     // front left
+    { x: -70, y: 0, scale: 1 },
+    { x: 0, y: 0, scale: 1 },
+    { x: 70, y: 0, scale: 1 },       // front right
 
-  const x = Math.cos(angle) * radius;
-  const y = Math.sin(angle) * radius;
+    { x: 120, y: -40, scale: 0.7 },  // back right
+    { x: 0, y: -70, scale: 0.6 },    // back center
+    { x: -120, y: -40, scale: 0.7 }  // back left
+  ];
+
+  const p = positions[index];
 
   return {
-    transform: `translate(${x}px, ${y}px)`
+    transform: `translate(${p.x}px, ${p.y}px) scale(${p.scale})`,
+    zIndex: Math.round(p.scale * 100),
+    opacity: p.scale < 1 ? 0.6 : 1
   };
 }
 
-export function ProcessCircle() {
+export function ProcessLoop() {
   const steps = ["Discover","Plan","Design","Develop","Deploy","Scale","Market"];
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setOffset(prev => (prev + 1) % steps.length);
-    }, 2000); // speed
+    }, 1500);
 
     return () => clearInterval(interval);
   }, []);
 
-  return e("div", { className: "circle-system" },
+  return e("div", { className: "loop-system" },
 
-    e("div", { className: "circle-base" }),
+    e("div", { className: "loop-base" }),
 
     steps.map((step, i) => {
-      const positionIndex = (i + offset) % steps.length;
+      const pos = (i + offset) % steps.length;
 
       return e("div", {
         key: i,
-        className: "circle-item",
-        style: getCirclePosition(positionIndex, steps.length)
+        className: "loop-item",
+        style: getLoopPosition(pos)
       }, step);
     })
   );
@@ -121,13 +130,13 @@ export function App() {
       )
     ),
 
-    /* PROCESS (YOUR NEW SYSTEM 🔄) */
+    /* PROCESS (YOUR LOOP SYSTEM 🔁) */
     e(Section, null,
       e("h2", {
         className: "text-2xl font-semibold mb-10 glow-text text-center"
       }, "Our Process"),
 
-      e(ProcessCircle)
+      e(ProcessLoop)
     ),
 
     /* PROJECTS */
