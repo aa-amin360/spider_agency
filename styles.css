@@ -254,10 +254,6 @@ body {
   animation: trainMove 12s linear infinite;
 }
 
-.train-wrapper:hover .train-track {
-  animation-play-state: paused;
-}
-
 /* items */
 .train-item {
   padding: 10px 20px;
