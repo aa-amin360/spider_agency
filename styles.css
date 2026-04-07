@@ -228,7 +228,7 @@ body {
   transition: all 0.3s ease;
 
   /* levitation animation */
-  animation: float 4s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
 }
 
 /* Each pill floats slightly differently */
@@ -240,9 +240,11 @@ body {
 .process-pill:nth-child(7) { animation-delay: 1.8s; }
 
 /* Floating motion */
-@keyframes float {
+@keyframes wave {
   0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+  25% { transform: translateY(-6px); }
+  50% { transform: translateY(0px); }
+  75% { transform: translateY(6px); }
   100% { transform: translateY(0px); }
 }
 
