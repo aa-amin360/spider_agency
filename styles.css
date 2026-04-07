@@ -1,0 +1,49 @@
+/* Smooth fade-in */
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* Glow Card */
+.glow-card {
+  background: linear-gradient(90deg, #7c3aed, #3b82f6);
+  padding: 1px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.glow-card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.inner-card {
+  background: #0b0f2a;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(90deg, #7c3aed, #3b82f6);
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.btn-secondary {
+  border: 1px solid #555;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+/* Hero Glow */
+.hero-glow {
+  height: 250px;
+  border-radius: 16px;
+  background: radial-gradient(circle, #3b82f6, #7c3aed);
+  box-shadow: 0 0 60px rgba(124, 58, 237, 0.6);
+}
