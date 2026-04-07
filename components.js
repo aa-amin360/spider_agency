@@ -18,52 +18,52 @@ export const Card = ({ title }) =>
    LOOP TRACK SYSTEM 🔁
 ========================= */
 
-function getLoopPosition(index) {
-  const positions = [
-    { x: -140, y: 0, scale: 1 },     // front left
-    { x: -70, y: 0, scale: 1 },
-    { x: 0, y: 0, scale: 1 },
-    { x: 70, y: 0, scale: 1 },       // front right
+function getLoopPosition(index, offset) {
+  const total = 7;
+  const angle = ((index + offset) / total) * Math.PI * 2;
 
-    { x: 120, y: -40, scale: 0.7 },  // back right
-    { x: 0, y: -70, scale: 0.6 },    // back center
-    { x: -120, y: -40, scale: 0.7 }  // back left
-  ];
+  const radiusX = 140;
+  const radiusY = 40;
 
-  const p = positions[index];
+  const x = Math.cos(angle) * radiusX;
+  const y = Math.sin(angle) * radiusY;
+
+  const scale = 0.6 + (Math.cos(angle) + 1) * 0.2;
 
   return {
-    transform: `translate(${p.x}px, ${p.y}px) scale(${p.scale})`,
-    zIndex: Math.round(p.scale * 100),
-    opacity: p.scale < 1 ? 0.6 : 1
+    transform: `translate(${x}px, ${y}px) scale(${scale})`,
+    opacity: scale > 0.85 ? 1 : 0,
+    zIndex: Math.floor(scale * 100)
   };
 }
 
 export function ProcessLoop() {
   const steps = ["Discover","Plan","Design","Develop","Deploy","Scale","Market"];
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setOffset(prev => (prev + 1) % steps.length);
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, []);
+   const [offset, setOffset] = useState(0);
+   
+   useEffect(() => {
+     let start = Date.now();
+   
+     const loop = () => {
+       const elapsed = (Date.now() - start) / 1000;
+       setOffset(elapsed * 0.5); // speed control
+       requestAnimationFrame(loop);
+     };
+   
+     loop();
+   }, []);
 
   return e("div", { className: "loop-system" },
 
     e("div", { className: "loop-base" }),
 
-    steps.map((step, i) => {
-      const pos = (i + offset) % steps.length;
-
-      return e("div", {
-        key: i,
-        className: "loop-item",
-        style: getLoopPosition(pos)
-      }, step);
-    })
+      steps.map((step, i) =>
+        e("div", {
+          key: i,
+          className: "loop-item",
+          style: getLoopPosition(i, offset)
+        }, step)
+      )
   );
 }
 
