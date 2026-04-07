@@ -210,3 +210,44 @@ body {
 .glow-text {
   text-shadow: 0 0 15px rgba(124, 58, 237, 0.7);
 }
+
+/* =========================
+   PROCESS LEVITATING PILLS
+========================= */
+
+.process-pill {
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  background: linear-gradient(90deg, #7c3aed, #3b82f6);
+  color: white;
+  position: relative;
+  cursor: pointer;
+
+  /* smooth feel */
+  transition: all 0.3s ease;
+
+  /* levitation animation */
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Each pill floats slightly differently */
+.process-pill:nth-child(2) { animation-delay: 0.3s; }
+.process-pill:nth-child(3) { animation-delay: 0.6s; }
+.process-pill:nth-child(4) { animation-delay: 0.9s; }
+.process-pill:nth-child(5) { animation-delay: 1.2s; }
+.process-pill:nth-child(6) { animation-delay: 1.5s; }
+.process-pill:nth-child(7) { animation-delay: 1.8s; }
+
+/* Floating motion */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Hover = stronger lift */
+.process-pill:hover {
+  transform: translateY(-12px) scale(1.08);
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.6);
+}
