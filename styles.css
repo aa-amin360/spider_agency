@@ -222,7 +222,6 @@ body {
   margin: 0 auto;
 }
 
-/* Base */
 .circle-base {
   position: absolute;
   bottom: 30px;
@@ -234,13 +233,13 @@ body {
   background: #111;
 }
 
-/* Items */
+/* FIXED center reference */
 .circle-item {
   position: absolute;
   top: 50%;
   left: 50%;
 
-  transform-origin: center;
+  transform: translate(0, 0);
 
   padding: 10px 18px;
   border-radius: 999px;
@@ -251,19 +250,5 @@ body {
 
   border: 1px solid rgba(255,255,255,0.08);
 
-  /* KEY PART 👇 */
-  animation: moveCircle 10s linear infinite;
-
-  /* stagger start */
-  animation-delay: calc(var(--i) * -1.4s);
-}
-
-/* Circular motion */
-@keyframes moveCircle {
-  0% {
-    transform: rotate(0deg) translate(120px) rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg) translate(120px) rotate(-360deg);
-  }
+  transition: transform 0.6s ease;
 }
