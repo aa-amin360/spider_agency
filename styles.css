@@ -86,3 +86,56 @@
   text-shadow: 0 0 15px rgba(124, 58, 237, 0.7);
 }
 
+/*V3*/
+/* Project card */
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: linear-gradient(120deg, #7c3aed, #3b82f6);
+}
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 15, 42, 0.9);
+  opacity: 0;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+/* Tech grid */
+.tech-item {
+  padding: 20px;
+  border-radius: 12px;
+  background: #111633;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.tech-item:hover {
+  transform: translateY(-5px);
+  background: #1a1f4a;
+}
+
+/* Testimonials */
+.testimonial {
+  background: #111633;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* CTA glow */
+.cta-box {
+  background: radial-gradient(circle, #3b82f6, #7c3aed);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(124, 58, 237, 0.6);
+}
