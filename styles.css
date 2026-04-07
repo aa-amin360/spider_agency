@@ -253,3 +253,79 @@ body {
   transform: translateY(-12px) scale(1.08);
   box-shadow: 0 10px 30px rgba(124, 58, 237, 0.6);
 }
+
+/* =========================
+   ORBIT LEVITATION SYSTEM
+========================= */
+
+.process-orbit {
+  position: relative;
+  width: 120px;
+  height: 80px;
+}
+
+/* Solid base */
+.process-base {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  width: 70px;
+  height: 12px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  filter: blur(6px);
+}
+
+/* Floating pill */
+.process-pill-float {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  color: white;
+
+  background: linear-gradient(90deg, #7c3aed, #3b82f6);
+
+  /* floating orbit */
+  animation: orbitFloat 4s ease-in-out infinite;
+
+  /* glow */
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.6);
+}
+
+/* Each item different timing */
+.process-orbit:nth-child(2) .process-pill-float { animation-delay: 0.3s; }
+.process-orbit:nth-child(3) .process-pill-float { animation-delay: 0.6s; }
+.process-orbit:nth-child(4) .process-pill-float { animation-delay: 0.9s; }
+.process-orbit:nth-child(5) .process-pill-float { animation-delay: 1.2s; }
+.process-orbit:nth-child(6) .process-pill-float { animation-delay: 1.5s; }
+.process-orbit:nth-child(7) .process-pill-float { animation-delay: 1.8s; }
+
+/* Circular + levitation motion */
+@keyframes orbitFloat {
+  0% {
+    transform: translate(-50%, 0px) rotate(0deg);
+  }
+  25% {
+    transform: translate(calc(-50% + 6px), -10px) rotate(5deg);
+  }
+  50% {
+    transform: translate(-50%, -14px) rotate(0deg);
+  }
+  75% {
+    transform: translate(calc(-50% - 6px), -10px) rotate(-5deg);
+  }
+  100% {
+    transform: translate(-50%, 0px) rotate(0deg);
+  }
+}
+
+/* Hover = stronger lift */
+.process-orbit:hover .process-pill-float {
+  transform: translate(-50%, -18px) scale(1.1);
+}
