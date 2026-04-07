@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "https://esm.sh/react@18";
+import React, { useEffect } from "https://esm.sh/react@18";
 
 const e = React.createElement;
-
-/* =========================
-   REUSABLE COMPONENTS
-========================= */
 
 export const Section = (props) =>
   e("section", { className: "max-w-6xl mx-auto px-6 py-12 reveal" }, props.children);
@@ -14,64 +10,8 @@ export const Card = ({ title }) =>
     e("div", { className: "inner-card" }, title)
   );
 
-/* =========================
-   INFINITY LOOP (SMOOTH)
-========================= */
-
-function getInfinityPosition(i, t, total) {
-  const progress = (i / total + t) % 1;
-
-  const angle = progress * Math.PI * 2;
-
-  // infinity curve
-  const x = Math.sin(angle) * 140;
-  const y = Math.sin(angle * 2) * 40;
-
-  // depth illusion
-  const scale = 0.7 + 0.3 * Math.cos(angle);
-
-  return {
-    transform: `translate(${x}px, ${y}px) scale(${scale})`,
-    opacity: scale > 0.9 ? 1 : 0, // hide back items
-    zIndex: Math.floor(scale * 100)
-  };
-}
-
-export function InfinityLoop() {
-  const steps = ["Discover","Plan","Design","Develop","Deploy","Scale","Market"];
-  const [t, setT] = useState(0);
-
-  useEffect(() => {
-    let start = Date.now();
-
-    const animate = () => {
-      const elapsed = (Date.now() - start) / 1000;
-      setT(elapsed * 0.4); // speed control
-      requestAnimationFrame(animate);
-    };
-
-    animate();
-  }, []);
-
-  return e("div", { className: "infinity-system" },
-
-    steps.map((step, i) =>
-      e("div", {
-        key: i,
-        className: "infinity-item",
-        style: getInfinityPosition(i, t, steps.length)
-      }, step)
-    )
-  );
-}
-
-/* =========================
-   MAIN APP
-========================= */
-
 export function App() {
 
-  // Apple-style reveal
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal");
 
@@ -81,14 +21,16 @@ export function App() {
           entry.target.classList.add("active");
         }
       });
-    }, { threshold: 0.15 });
+    }, {
+      threshold: 0.15
+    });
 
     elements.forEach(el => observer.observe(el));
   }, []);
 
   return e("div", null,
 
-    /* NAVBAR */
+    // Navbar
     e("nav", { className: "flex justify-between items-center px-6 py-4 max-w-6xl mx-auto" },
       e("h1", { className: "font-bold text-lg glow-text" }, "LOGO"),
       e("div", { className: "space-x-6 hidden md:flex" },
@@ -100,7 +42,7 @@ export function App() {
       e("button", { className: "btn-primary" }, "Start a Project")
     ),
 
-    /* HERO */
+    // Hero
     e(Section, null,
       e("div", { className: "grid md:grid-cols-2 gap-10 items-center" },
         e("div", null,
@@ -119,7 +61,7 @@ export function App() {
       )
     ),
 
-    /* SERVICES */
+    // Services
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Our Services"),
       e("div", { className: "grid md:grid-cols-3 gap-4" },
@@ -128,16 +70,26 @@ export function App() {
       )
     ),
 
-    /* PROCESS (CENTERED + SMOOTH ♾️) */
-    e(Section, null,
-      e("h2", {
-        className: "text-2xl font-semibold mb-10 glow-text text-center"
-      }, "Our Process"),
+    // Process
+   e(Section, null,
+     e("h2", {
+       className: "text-2xl font-semibold mb-8 glow-text text-center"
+     }, "Our Process"),
+   
+     e("div", { className: "train-wrapper" },
+   
+       e("div", { className: "train-track" },
+         ["Discover","Plan","Design","Develop","Deploy","Scale","Market",
+          "Discover","Plan","Design"] // duplicate for seamless loop
+         .map((step, i) =>
+           e("div", { key: i, className: "train-item" }, step)
+         )
+       )
+   
+     )
+   ),
 
-      e(InfinityLoop)
-    ),
-
-    /* PROJECTS */
+    // Projects
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Featured Projects"),
       e("div", { className: "grid md:grid-cols-2 gap-6" },
@@ -151,7 +103,7 @@ export function App() {
       )
     ),
 
-    /* TECH STACK */
+    // Tech Stack
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Tech Stack"),
       e("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-4" },
@@ -162,7 +114,7 @@ export function App() {
       )
     ),
 
-    /* TESTIMONIALS */
+    // Testimonials
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Testimonials"),
       e("div", { className: "grid md:grid-cols-3 gap-4" },
@@ -174,7 +126,7 @@ export function App() {
       )
     ),
 
-    /* CTA */
+    // CTA
     e(Section, null,
       e("div", { className: "cta-box" },
         e("h2", { className: "text-2xl font-bold mb-4" },
@@ -184,7 +136,7 @@ export function App() {
       )
     ),
 
-    /* FOOTER */
+    // Footer
     e("footer", { className: "border-t border-gray-700 mt-10 py-6 text-center reveal" },
       e("p", null, "© 2026 AI Agency")
     )
