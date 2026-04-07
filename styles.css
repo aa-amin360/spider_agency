@@ -47,3 +47,42 @@
   background: radial-gradient(circle, #3b82f6, #7c3aed);
   box-shadow: 0 0 60px rgba(124, 58, 237, 0.6);
 }
+
+
+
+/*V2*/
+/* Scroll reveal base */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Magnetic button effect */
+.btn-primary, .btn-secondary {
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+  transform: scale(1.05);
+}
+
+/* Smooth hover glow */
+.glow-card {
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glow-card:hover {
+  box-shadow: 0 10px 40px rgba(124, 58, 237, 0.5);
+}
+
+/* Text glow */
+.glow-text {
+  text-shadow: 0 0 15px rgba(124, 58, 237, 0.7);
+}
+
