@@ -220,32 +220,9 @@ body {
   width: 500px;
   height: 250px;
   margin: 0 auto;
-  overflow: hidden;
 }
 
-/* fade edges (cave effect) */
-.infinity-system::before,
-.infinity-system::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 120px;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.infinity-system::before {
-  left: 0;
-  background: linear-gradient(to right, #0b0f2a, transparent);
-}
-
-.infinity-system::after {
-  right: 0;
-  background: linear-gradient(to left, #0b0f2a, transparent);
-}
-
-/* ITEMS */
+/* items */
 .infinity-item {
   position: absolute;
   top: 50%;
@@ -258,27 +235,6 @@ body {
   background: linear-gradient(90deg, #7c3aed, #3b82f6);
   color: white;
 
-  white-space: nowrap;
-
-  animation: infinityMove 10s linear infinite;
-  animation-delay: calc(var(--i) * -1.4s);
-}
-
-/* ♾️ PATH */
-@keyframes infinityMove {
-  0% {
-    transform: translate(-50%, -50%) translateX(-150px) translateY(0);
-  }
-  25% {
-    transform: translate(-50%, -50%) translateX(0px) translateY(-40px);
-  }
-  50% {
-    transform: translate(-50%, -50%) translateX(150px) translateY(0);
-  }
-  75% {
-    transform: translate(-50%, -50%) translateX(0px) translateY(40px);
-  }
-  100% {
-    transform: translate(-50%, -50%) translateX(-150px) translateY(0);
-  }
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s linear;
 }
