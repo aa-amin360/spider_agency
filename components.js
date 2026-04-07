@@ -13,7 +13,7 @@ export const Card = ({ title }) =>
 export function App() {
 
   useEffect(() => {
-    const reveals = document.querySelectorAll(".reveal");
+    const elements = document.querySelectorAll(".reveal");
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -21,9 +21,11 @@ export function App() {
           entry.target.classList.add("active");
         }
       });
+    }, {
+      threshold: 0.15
     });
 
-    reveals.forEach(el => observer.observe(el));
+    elements.forEach(el => observer.observe(el));
   }, []);
 
   return e("div", null,
@@ -55,7 +57,7 @@ export function App() {
             e("button", { className: "btn-secondary" }, "Book a Call")
           )
         ),
-        e("div", { className: "hero-glow reveal" })
+        e("div", { className: "hero-glow" })
       )
     ),
 
@@ -81,12 +83,11 @@ export function App() {
         ))
       )
     ),
-    
+
     // Projects
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Featured Projects"),
       e("div", { className: "grid md:grid-cols-2 gap-6" },
-    
         ["AI SaaS Platform","Automation System"].map((proj,i)=>(
           e("div", { key:i, className: "project-card h-48" },
             e("div", { className: "project-overlay" },
@@ -96,7 +97,7 @@ export function App() {
         ))
       )
     ),
-    
+
     // Tech Stack
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Tech Stack"),
@@ -107,7 +108,7 @@ export function App() {
         ))
       )
     ),
-    
+
     // Testimonials
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Testimonials"),
@@ -119,7 +120,7 @@ export function App() {
         ))
       )
     ),
-    
+
     // CTA
     e(Section, null,
       e("div", { className: "cta-box" },
