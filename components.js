@@ -1,9 +1,9 @@
-import React from "https://esm.sh/react@18";
+import React, { useEffect } from "https://esm.sh/react@18";
 
 const e = React.createElement;
 
 export const Section = (props) =>
-  e("section", { className: "max-w-6xl mx-auto px-6 py-12 fade-in" }, props.children);
+  e("section", { className: "max-w-6xl mx-auto px-6 py-12 reveal" }, props.children);
 
 export const Card = ({ title }) =>
   e("div", { className: "glow-card" },
@@ -11,11 +11,26 @@ export const Card = ({ title }) =>
   );
 
 export function App() {
+
+  useEffect(() => {
+    const reveals = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    });
+
+    reveals.forEach(el => observer.observe(el));
+  }, []);
+
   return e("div", null,
 
     // Navbar
     e("nav", { className: "flex justify-between items-center px-6 py-4 max-w-6xl mx-auto" },
-      e("h1", { className: "font-bold text-lg" }, "LOGO"),
+      e("h1", { className: "font-bold text-lg glow-text" }, "LOGO"),
       e("div", { className: "space-x-6 hidden md:flex" },
         e("a", null, "Services"),
         e("a", null, "Work"),
@@ -29,7 +44,7 @@ export function App() {
     e(Section, null,
       e("div", { className: "grid md:grid-cols-2 gap-10 items-center" },
         e("div", null,
-          e("h1", { className: "text-4xl font-bold mb-4" },
+          e("h1", { className: "text-4xl font-bold mb-4 glow-text" },
             "We Build, Scale, and Automate the Future"
           ),
           e("p", { className: "mb-6 text-gray-300" },
@@ -40,13 +55,13 @@ export function App() {
             e("button", { className: "btn-secondary" }, "Book a Call")
           )
         ),
-        e("div", { className: "hero-glow" })
+        e("div", { className: "hero-glow reveal" })
       )
     ),
 
     // Services
     e(Section, null,
-      e("h2", { className: "text-2xl font-semibold mb-6" }, "Our Services"),
+      e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Our Services"),
       e("div", { className: "grid md:grid-cols-3 gap-4" },
         ["AI & Automation","Full Stack Development","Cloud & DevOps","Cybersecurity","Digital Marketing","SaaS Solutions"]
         .map((item, i) => e(Card, { key: i, title: item }))
@@ -54,7 +69,7 @@ export function App() {
     ),
 
     // Footer
-    e("footer", { className: "border-t border-gray-700 mt-10 py-6 text-center" },
+    e("footer", { className: "border-t border-gray-700 mt-10 py-6 text-center reveal" },
       e("p", null, "© 2026 AI Agency")
     )
   );
