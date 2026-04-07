@@ -1,6 +1,10 @@
-import React, { useEffect } from "https://esm.sh/react@18";
+import React, { useEffect, useState } from "https://esm.sh/react@18";
 
 const e = React.createElement;
+
+/* =========================
+   REUSABLE COMPONENTS
+========================= */
 
 export const Section = (props) =>
   e("section", { className: "max-w-6xl mx-auto px-6 py-12 reveal" }, props.children);
@@ -10,8 +14,57 @@ export const Card = ({ title }) =>
     e("div", { className: "inner-card" }, title)
   );
 
+/* =========================
+   PROCESS CIRCLE SYSTEM 🔄
+========================= */
+
+function getCirclePosition(index, total = 7) {
+  const radius = 120;
+  const angle = (index / total) * (2 * Math.PI);
+
+  const x = Math.cos(angle) * radius;
+  const y = Math.sin(angle) * radius;
+
+  return {
+    transform: `translate(${x}px, ${y}px)`
+  };
+}
+
+export function ProcessCircle() {
+  const steps = ["Discover","Plan","Design","Develop","Deploy","Scale","Market"];
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOffset(prev => (prev + 1) % steps.length);
+    }, 2000); // speed
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return e("div", { className: "circle-system" },
+
+    e("div", { className: "circle-base" }),
+
+    steps.map((step, i) => {
+      const positionIndex = (i + offset) % steps.length;
+
+      return e("div", {
+        key: i,
+        className: "circle-item",
+        style: getCirclePosition(positionIndex, steps.length)
+      }, step);
+    })
+  );
+}
+
+/* =========================
+   MAIN APP
+========================= */
+
 export function App() {
 
+  /* Apple-style reveal */
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal");
 
@@ -21,16 +74,14 @@ export function App() {
           entry.target.classList.add("active");
         }
       });
-    }, {
-      threshold: 0.15
-    });
+    }, { threshold: 0.15 });
 
     elements.forEach(el => observer.observe(el));
   }, []);
 
   return e("div", null,
 
-    // Navbar
+    /* NAVBAR */
     e("nav", { className: "flex justify-between items-center px-6 py-4 max-w-6xl mx-auto" },
       e("h1", { className: "font-bold text-lg glow-text" }, "LOGO"),
       e("div", { className: "space-x-6 hidden md:flex" },
@@ -42,7 +93,7 @@ export function App() {
       e("button", { className: "btn-primary" }, "Start a Project")
     ),
 
-    // Hero
+    /* HERO */
     e(Section, null,
       e("div", { className: "grid md:grid-cols-2 gap-10 items-center" },
         e("div", null,
@@ -61,7 +112,7 @@ export function App() {
       )
     ),
 
-    // Services
+    /* SERVICES */
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Our Services"),
       e("div", { className: "grid md:grid-cols-3 gap-4" },
@@ -70,30 +121,16 @@ export function App() {
       )
     ),
 
-    // Process
+    /* PROCESS (YOUR NEW SYSTEM 🔄) */
     e(Section, null,
-    
       e("h2", {
-        className: "text-2xl font-semibold mb-10 text-center"
+        className: "text-2xl font-semibold mb-10 glow-text text-center"
       }, "Our Process"),
-    
-      e("div", { className: "circle-system" },
-    
-        e("div", { className: "circle-base" }),
-    
-        ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
-        .map((step,i)=>(
-          e("div", {
-            key: i,
-            className: "circle-item",
-            style: { "--i": i }
-          }, step)
-        ))
-    
-      )
+
+      e(ProcessCircle)
     ),
 
-    // Projects
+    /* PROJECTS */
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Featured Projects"),
       e("div", { className: "grid md:grid-cols-2 gap-6" },
@@ -107,7 +144,7 @@ export function App() {
       )
     ),
 
-    // Tech Stack
+    /* TECH STACK */
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Tech Stack"),
       e("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-4" },
@@ -118,7 +155,7 @@ export function App() {
       )
     ),
 
-    // Testimonials
+    /* TESTIMONIALS */
     e(Section, null,
       e("h2", { className: "text-2xl font-semibold mb-6 glow-text" }, "Testimonials"),
       e("div", { className: "grid md:grid-cols-3 gap-4" },
@@ -130,7 +167,7 @@ export function App() {
       )
     ),
 
-    // CTA
+    /* CTA */
     e(Section, null,
       e("div", { className: "cta-box" },
         e("h2", { className: "text-2xl font-bold mb-4" },
@@ -140,7 +177,7 @@ export function App() {
       )
     ),
 
-    // Footer
+    /* FOOTER */
     e("footer", { className: "border-t border-gray-700 mt-10 py-6 text-center reveal" },
       e("p", null, "© 2026 AI Agency")
     )
