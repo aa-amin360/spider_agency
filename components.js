@@ -77,19 +77,17 @@ export function App() {
         className: "text-2xl font-semibold mb-10 text-center"
       }, "Our Process"),
     
-      e("div", { className: "magnetic-system" },
+      e("div", { className: "ufo-system" },
     
-        // solid base
-        e("div", { className: "magnetic-base" }),
+        e("div", { className: "ufo-base" }),
     
-        // floating rotating ring
-        e("div", { className: "magnetic-ring" },
+        e("div", { className: "ufo-ring" },
     
           ["Discover","Plan","Design","Develop","Deploy","Scale","Market"]
           .map((step,i)=>(
             e("div", {
               key: i,
-              className: "magnetic-item",
+              className: "ufo-item",
               style: { "--i": i }
             }, step)
           ))
